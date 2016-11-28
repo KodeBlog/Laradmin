@@ -1,0 +1,17 @@
+/vendor
+/node_modules
+/public/storage
+Homestead.yaml
+Homestead.json
+/.idea
+.env
+.gitattributes
+.env.example
+composer.json
+composer.lock
+package.json
+readme.md
+phpunit.xml
+npm-debug.log
+gulpfile.js
+server.php
