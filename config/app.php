@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'Nairobi/Africa',
+    'timezone' => 'Africa/Dar_es_Salaam',
 
     /*
     |--------------------------------------------------------------------------
