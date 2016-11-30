@@ -12,6 +12,6 @@
 */
 
 Route::get('/', [
-   'uses' => '\Larashop\Http\Controllers\HomeController@index',
+   'uses' => 'HomeController@index',
    'as' => 'home',
 ]);
