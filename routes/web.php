@@ -16,7 +16,7 @@ Route::get('/', [
    'as' => 'home',
    ]);
 
-Route::group(['domain' => 'myshop.com','prefix' => 'admin','namespace' => 'Admin'],function(){
+Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::resource('customers', 'CustomersController');
     Route::resource('products', 'ProductsController');
     Route::resource('users', 'UsersController');
