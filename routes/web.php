@@ -14,4 +14,15 @@
 Route::get('/', [
    'uses' => 'HomeController@index',
    'as' => 'home',
-]);
+   ]);
+
+Route::group(['domain' => 'myshop.com','prefix' => 'admin','namespace' => 'Admin'],function(){
+    Route::resource('customers', 'CustomersController');
+    Route::resource('products', 'ProductsController');
+    Route::resource('users', 'UsersController');
+
+    Route::get('orders',[
+        'uses' => 'OrdersController@index',
+        'as' => 'orders',
+        ]);
+});
