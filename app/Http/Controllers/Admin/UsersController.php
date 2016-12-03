@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.users.users_list');
     }
 
     /**
@@ -24,7 +24,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.users_create');
     }
 
     /**
@@ -35,7 +35,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been created.");
     }
 
     /**
@@ -46,7 +46,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.users.users_delete');
     }
 
     /**
@@ -57,7 +57,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.users.users_edit');
     }
 
     /**
@@ -69,7 +69,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been updated.");
     }
 
     /**
@@ -80,6 +80,6 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been archived.");
     }
 }
