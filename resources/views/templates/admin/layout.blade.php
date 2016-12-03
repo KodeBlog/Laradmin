@@ -65,6 +65,7 @@
                                 <li><a hef="#"><i class="fa fa-home"></i> Home </a></li>
                                 <li><a><i class="fa fa-edit"></i> Products <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                        <li><a href="{{route('brands.index')}}">Brands list</a></li>
                                         <li><a href="{{route('product-categories.index')}}">Categories</a></li>
                                         <li><a href="{{route('products.index')}}">Products list</a></li>
                                     </ul>
