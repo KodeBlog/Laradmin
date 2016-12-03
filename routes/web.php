@@ -18,6 +18,7 @@ Route::get('/', [
 
 Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
     Route::resource('customers', 'CustomersController');
+    Route::resource('brands', 'BrandsController');
     Route::resource('product-categories', 'ProductCategoriesController');
     Route::resource('products', 'ProductsController');
     Route::resource('users', 'UsersController');
