@@ -5,6 +5,3 @@
 Homestead.json
 Homestead.yaml
 .env
-composer.lock
-.env.example
-.gitattributes
