@@ -4,10 +4,8 @@
 Homestead.yaml
 Homestead.json
 /.idea
-.env
 .gitattributes
 .env.example
-composer.json
 composer.lock
 package.json
 readme.md
