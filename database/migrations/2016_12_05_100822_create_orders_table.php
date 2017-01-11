@@ -20,8 +20,8 @@ class CreateOrdersTable extends Migration
             $table->integer('customer_id')->unsigned()->index();
             $table->float('total_amount');
             $table->string('status');
-            $table->boolean('archived')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('customer_id')->references('id')->on('customers');
         });

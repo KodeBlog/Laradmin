@@ -20,8 +20,8 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->string('postal_address');
             $table->string('physical_address');
-            $table->boolean('archived')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

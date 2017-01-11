@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->float('price')->default(0);
             $table->integer('brand_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
-            $table->boolean('archived')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('brand_id')->references('id')->on('brands');
             $table->foreign('category_id')->references('id')->on('categories');

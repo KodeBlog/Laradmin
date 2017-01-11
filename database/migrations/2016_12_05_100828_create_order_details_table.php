@@ -20,8 +20,8 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantity');
             $table->float('price');
             $table->float('sub_total');
-            $table->boolean('archived')->default(0);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('order_id')->references('id')->on('orders');
         });
