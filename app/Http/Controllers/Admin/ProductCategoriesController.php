@@ -47,6 +47,14 @@ class ProductCategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|unique:customers',
+            'postal_address' => 'required',
+            'physical_address' => 'required',
+        ]);
+
         $category = Category::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),

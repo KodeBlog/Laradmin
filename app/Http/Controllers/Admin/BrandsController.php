@@ -47,6 +47,11 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|unique:brands',
+            'description' => 'required',
+        ]);
+
         $brand = Brand::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
@@ -100,6 +105,10 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'description' => 'required',
+        ]);
+
         $brand = Brand::find($id);
 
         if (!$brand){
