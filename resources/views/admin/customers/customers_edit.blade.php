@@ -12,13 +12,13 @@
                 </div>
                 <div class="x_content">
                     <br />
-                    <form method="post" action="{{ route('customers.update', ['id' => 1]) }}" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="{{ route('customers.update', ['id' => $customer->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first_name">First Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="first_name" name="first_name" readonly="1" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$customer->first_name}}" id="first_name" name="first_name" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('first_name'))
                                 <span class="help-block">{{ $errors->first('first_name') }}</span>
                                 @endif
@@ -29,7 +29,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last_name">Last Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="last_name" name="last_name" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$customer->last_name}}" id="last_name" name="last_name" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('last_name'))
                                 <span class="help-block">{{ $errors->first('last_name') }}</span>
                                 @endif
@@ -40,7 +40,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="email" name="email" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$customer->email}}" id="email" name="email" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('email'))
                                 <span class="help-block">{{ $errors->first('email') }}</span>
                                 @endif
@@ -51,7 +51,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="postal_address">Postal Address <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="postal_address" name="postal_address" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$customer->postal_address}}" id="postal_address" name="postal_address" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('postal_address'))
                                 <span class="help-block">{{ $errors->first('postal_address') }}</span>
                                 @endif
@@ -62,7 +62,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="physical_address">Physical Address <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="physical_address" name="physical_address" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$customer->physical_address}}" id="physical_address" name="physical_address" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('physical_address'))
                                 <span class="help-block">{{ $errors->first('physical_address') }}</span>
                                 @endif

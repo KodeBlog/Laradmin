@@ -12,12 +12,12 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <p>Are you sure you want to delete <strong>Brand</strong></p>
+                    <p>Are you sure you want to delete <strong>{{$brand->name}}</strong></p>
 
-                    <form method="POST" action="{{ route('brands.destroy', ['id' => 1]) }}">
+                    <form method="POST" action="{{ route('brands.destroy', ['id' => $brand->id]) }}">
                         <input type="hidden" name="_token" value="{{ Session::token() }}">
                         <input name="_method" type="hidden" value="DELETE">
-                        <button type="submit" class="btn btn-danger">Yes I'm sure. Delete</button>
+                        <button type="submit" class="btn btn-danger">Yes I'm sure. Delete <strong>{{$brand->name}}</strong></button>
                     </form>
                 </div>
             </div>

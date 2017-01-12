@@ -2,6 +2,7 @@
 
 namespace Larashop\Http\Controllers\Admin;
 
+use Larashop\Models\Order;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
 
@@ -14,6 +15,13 @@ class OrdersController extends Controller
      */
         public function index()
         {
-            return view('admin.orders.orders_list');
+            $orders = Order::all();
+
+            $params = [
+                'title' => 'Orders Listing',
+                'orders' => $orders,
+            ];
+
+            return view('admin.orders.orders_list')->with($params);
         }
     }

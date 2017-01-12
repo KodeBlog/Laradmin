@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel Admin Panel</title>
+    <title>{{$title or "Laravel Admin Panel"}}</title>
 
     <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
     <!-- Bootstrap -->

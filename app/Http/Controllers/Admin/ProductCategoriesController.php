@@ -3,6 +3,7 @@
 namespace Larashop\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Larashop\Models\Category;
 use Larashop\Http\Controllers\Controller;
 
 class ProductCategoriesController extends Controller
@@ -14,7 +15,14 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        return view('admin.categories.categories_list');
+        $categories = Category::all();
+
+        $params = [
+            'title' => 'Categories Listing',
+            'categories' => $categories,
+        ];
+
+        return view('admin.categories.categories_list')->with($params);
     }
 
     /**
@@ -24,7 +32,11 @@ class ProductCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.categories_create');
+        $params = [
+            'title' => 'Create Product Category',
+        ];
+
+        return view('admin.categories.categories_create')->with($params);
     }
 
     /**
@@ -35,7 +47,12 @@ class ProductCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('product-categories.index')->with('success', "The product category <strong>Category</strong> has successfully been created.");
+        $category = Category::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('product-categories.index')->with('success', "The product category <strong>$category->name</strong> has successfully been created.");
     }
 
     /**
@@ -46,7 +63,14 @@ class ProductCategoriesController extends Controller
      */
     public function show($id)
     {
-        return view('admin.categories.categories_delete');
+        $category = Category::find($id);
+
+        $params = [
+            'title' => 'Edit Product Category',
+            'category' => $category,
+        ];
+
+        return view('admin.categories.categories_delete')->with($params);
     }
 
     /**
@@ -57,7 +81,14 @@ class ProductCategoriesController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.categories.categories_edit');
+        $category = Category::find($id);
+
+        $params = [
+            'title' => 'Edit Product Category',
+            'category' => $category,
+        ];
+
+        return view('admin.categories.categories_edit')->with($params);
     }
 
     /**
@@ -69,6 +100,18 @@ class ProductCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $category = Category::find($id);
+
+        if (!$category){
+            return redirect()
+                ->route('product-categories.index')
+                ->with('warning', 'The category you requested for has not been found.');
+        }
+
+        $category->description = $request->input('description');
+
+        $category->save();
+
         return redirect()->route('product-categories.index')->with('success', "The product category <strong>Category</strong> has successfully been updated.");
     }
 
@@ -80,6 +123,16 @@ class ProductCategoriesController extends Controller
      */
     public function destroy($id)
     {
+        $category = Category::find($id);
+
+        if (!$category){
+            return redirect()
+                ->route('product-categories.index')
+                ->with('warning', 'The category you requested for has not been found.');
+        }
+
+        $category->delete();
+
         return redirect()->route('product-categories.index')->with('success', "The product category <strong>Category</strong> has successfully been archived.");
     }
 }

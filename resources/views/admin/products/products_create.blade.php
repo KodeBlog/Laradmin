@@ -58,6 +58,40 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('brand_id') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand_id">Brand <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control" id="brand_id" name="brand_id">
+                                    @if(count($brands))
+                                        @foreach($brands as $row)
+                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('brand_id'))
+                                <span class="help-block">{{ $errors->first('brand_id') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_id">Category <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control" id="category_id" name="category_id">
+                                    @if(count($categories))
+                                        @foreach($categories as $row)
+                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('category_id'))
+                                <span class="help-block">{{ $errors->first('category_id') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="ln_solid"></div>
 
                         <div class="form-group">
