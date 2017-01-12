@@ -14,13 +14,13 @@
                     <br />
                     <form method="post" action="{{ route('product-categories.store') }}" data-parsley-validate class="form-horizontal form-label-left">
 
-                        <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category">Category <span class="required">*</span>
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Category <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="{{ Request::old('category') ?: '' }}" id="category" name="category" class="form-control col-md-7 col-xs-12">
-                                @if ($errors->has('category'))
-                                <span class="help-block">{{ $errors->first('category') }}</span>
+                                <input type="text" value="{{ Request::old('name') ?: '' }}" id="name" name="name" class="form-control col-md-7 col-xs-12">
+                                @if ($errors->has('name'))
+                                <span class="help-block">{{ $errors->first('name') }}</span>
                                 @endif
                             </div>
                         </div>

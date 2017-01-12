@@ -12,13 +12,12 @@
                 </div>
                 <div class="x_content">
                     <br />
-                    <form method="post" action="{{ route('brands.update', ['id' => 1]) }}" data-parsley-validate class="form-horizontal form-label-left">
-
+                    <form method="post" action="{{ route('brands.update', ['id' => $brand->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group{{ $errors->has('brand') ? ' has-error' : '' }}">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand">Brand <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="brand" name="brand" readonly="1" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$brand->name}}" id="name" name="name" readonly="1" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('brand'))
                                 <span class="help-block">{{ $errors->first('brand') }}</span>
                                 @endif
@@ -29,7 +28,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="" id="description" name="description" class="form-control col-md-7 col-xs-12">
+                                <input type="text" value="{{$brand->description}}" id="description" name="description" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('description'))
                                 <span class="help-block">{{ $errors->first('description') }}</span>
                                 @endif

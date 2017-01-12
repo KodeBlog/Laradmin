@@ -40,7 +40,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Password
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="{{ Request::old('password') ?: '' }}" id="password" name="password" class="form-control col-md-7 col-xs-12">
+                                <input type="password" value="{{ Request::old('password') ?: '' }}" id="password" name="password" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('password'))
                                 <span class="help-block">{{ $errors->first('password') }}</span>
                                 @endif
@@ -51,7 +51,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="confirm_password">Confirm Password <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="{{ Request::old('confirm_password') ?: '' }}" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12">
+                                <input type="password" value="{{ Request::old('confirm_password') ?: '' }}" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('confirm_password'))
                                 <span class="help-block">{{ $errors->first('confirm_password') }}</span>
                                 @endif
