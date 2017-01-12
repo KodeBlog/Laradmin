@@ -3,9 +3,12 @@
 namespace Larashop\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderDetail extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,6 +20,5 @@ class OrderDetail extends Model
         'quantity',
         'price',
         'sub_total',
-        'archived',
     ];
 }
