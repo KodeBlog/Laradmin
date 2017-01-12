@@ -2,6 +2,7 @@
 
 namespace Larashop\Http\Controllers\Admin;
 
+use Larashop\Models\User;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
 
@@ -14,7 +15,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.users_list');
+        $users = User::all();
+
+        $params = [
+            'title' => 'Users Listing',
+            'users' => $users,
+        ];
+
+        return view('admin.users.users_list')->with($params);
     }
 
     /**
@@ -24,7 +32,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.users_create');
+        $params = [
+            'title' => 'Create User',
+        ];
+
+        return view('admin.users.users_create')->with($params);
     }
 
     /**
@@ -35,7 +47,13 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been created.");
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been created.");
     }
 
     /**
@@ -46,7 +64,14 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return view('admin.users.users_delete');
+        $user = User::find($id);
+
+        $params = [
+            'title' => 'Delete User',
+            'user' => $user,
+        ];
+
+        return view('admin.users.users_delete')->with($params);
     }
 
     /**
@@ -57,7 +82,14 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.users.users_edit');
+        $user = User::find($id);
+
+        $params = [
+            'title' => 'Edit User',
+            'user' => $user,
+        ];
+
+        return view('admin.users.users_edit')->with($params);
     }
 
     /**
@@ -69,7 +101,19 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been updated.");
+        $user = User::find($id);
+
+        if (!$user){
+            return redirect()
+                ->route('users.index')
+                ->with('warning', 'The user you requested for has not been found.');
+        }
+
+        $user->email = $request->input('email');
+
+        $user->save();
+
+        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
     }
 
     /**
@@ -80,6 +124,16 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        return redirect()->route('users.index')->with('success', "The user <strong>user name</strong> has successfully been archived.");
+        $user = User::find($id);
+
+        if (!$user){
+            return redirect()
+                ->route('users.index')
+                ->with('warning', 'The user you requested for has not been found.');
+        }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been archived.");
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Larashop\Http\Controllers\Admin;
 
+use Larashop\Models\Brand;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
 
@@ -12,9 +13,16 @@ class BrandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.brands.brands_list');
+      public function index()
+      {
+        $brands = Brand::all();
+
+        $params = [
+            'title' => 'Brands Listing',
+            'brands' => $brands,
+        ];
+
+        return view('admin.brands.brands_list')->with($params);
     }
 
     /**
@@ -24,7 +32,11 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        return view('admin.brands.brands_create');
+        $params = [
+            'title' => 'Create Brand',
+        ];
+
+        return view('admin.brands.brands_create')->with($params);
     }
 
     /**
@@ -35,7 +47,12 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been created.");
+        $brand = Brand::create([
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('brands.index')->with('success', "The brand <strong>$brand->name</strong> has successfully been created.");
     }
 
     /**
@@ -46,7 +63,14 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        return view('admin.brands.brands_delete');
+        $brand = Brand::find($id);
+
+        $params = [
+            'title' => 'Delete Brand',
+            'brand' => $brand,
+        ];
+
+        return view('admin.brands.brands_delete')->with($params);
     }
 
     /**
@@ -57,7 +81,14 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.brands.brands_edit');
+        $brand = Brand::find($id);
+
+        $params = [
+            'title' => 'Edit Brand',
+            'brand' => $brand,
+        ];
+
+        return view('admin.brands.brands_edit')->with($params);
     }
 
     /**
@@ -69,7 +100,19 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been updated.");
+        $brand = Brand::find($id);
+
+        if (!$brand){
+            return redirect()
+                ->route('brands.index')
+                ->with('warning', 'The brand you requested for has not been found.');
+        }
+
+        $brand->description = $request->input('description');
+
+        $brand->save();
+
+        return redirect()->route('brands.index')->with('success', "The brand <strong>$brand->name</strong> has successfully been updated.");
     }
 
     /**
@@ -80,6 +123,16 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
+        $brand = Brand::find($id);
+
+        if (!$brand){
+            return redirect()
+                ->route('brands.index')
+                ->with('warning', 'The brand you requested for has not been found.');
+        }
+
+        $brand->delete();
+
         return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been archived.");
     }
 }
