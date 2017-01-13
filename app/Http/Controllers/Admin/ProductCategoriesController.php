@@ -48,11 +48,8 @@ class ProductCategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|unique:customers',
-            'postal_address' => 'required',
-            'physical_address' => 'required',
+            'name' => 'required|unique:categories',
+            'description' => 'required',
         ]);
 
         $category = Category::create([
@@ -110,12 +107,19 @@ class ProductCategoriesController extends Controller
     {
         $category = Category::find($id);
 
-        if (!$category){
+        if (!$category)
+        {
             return redirect()
                 ->route('product-categories.index')
                 ->with('warning', 'The category you requested for has not been found.');
         }
 
+        $this->validate($request, [
+            'name' => 'required|unique:categories,name,'.$id,
+            'description' => 'required',
+        ]);
+
+        $category->name = $request->input('name');
         $category->description = $request->input('description');
 
         $category->save();

@@ -18,7 +18,7 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="product_code">Product Code <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" value="{{$product->product_code}}" id="product_code" name="product_code" readonly="1" class="form-control col-md-7 col-xs-12">
+                            <input type="text" value="{{$product->product_code}}" id="product_code" name="product_code" class="form-control col-md-7 col-xs-12">
                                 @if ($errors->has('product_code'))
                                 <span class="help-block">{{ $errors->first('product_code') }}</span>
                                 @endif

@@ -54,6 +54,15 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'product_code' => 'required|unique:products',
+            'product_name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required',
+            'category_id' => 'required',
+        ]);
+
         $product = Product::create([
             'product_code' => $request->input('product_code'),
             'product_name' => $request->input('product_name'),
@@ -123,6 +132,16 @@ class ProductsController extends Controller
                 ->with('warning', 'The product you requested for has not been found.');
         }
 
+        $this->validate($request, [
+            'product_code' => 'required|unique:products,product_code,'.$id,
+            'product_name' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'brand_id' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        $product->product_code = $request->input('product_code');
         $product->product_name = $request->input('product_name');
         $product->description = $request->input('description');
         $product->price = $request->input('price');

@@ -47,6 +47,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+        ]);
+
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
@@ -108,6 +114,11 @@ class UsersController extends Controller
                 ->route('users.index')
                 ->with('warning', 'The user you requested for has not been found.');
         }
+
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$id,
+        ]);
 
         $user->email = $request->input('email');
 

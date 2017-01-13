@@ -105,10 +105,6 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'description' => 'required',
-        ]);
-
         $brand = Brand::find($id);
 
         if (!$brand){
@@ -117,6 +113,12 @@ class BrandsController extends Controller
                 ->with('warning', 'The brand you requested for has not been found.');
         }
 
+        $this->validate($request, [
+            'name' => 'required|unique:brands,name,'.$id,
+            'description' => 'required',
+        ]);
+
+        $brand->name = $request->input('name');
         $brand->description = $request->input('description');
 
         $brand->save();

@@ -111,14 +111,6 @@ class CustomersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:customers,email,'.$id,
-            'postal_address' => 'required',
-            'physical_address' => 'required',
-        ]);
-
         $customer = Customer::find($id);
 
         if (!$customer){
@@ -126,6 +118,14 @@ class CustomersController extends Controller
                 ->route('customers.index')
                 ->with('warning', 'The customer you requested for has not been found.');
         }
+
+        $this->validate($request, [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:customers,email,'.$id,
+            'postal_address' => 'required',
+            'physical_address' => 'required',
+        ]);
 
         $customer->first_name = $request->input('first_name');
         $customer->last_name = $request->input('last_name');
