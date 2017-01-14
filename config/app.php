@@ -166,7 +166,8 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         //
 
         /*
@@ -225,7 +226,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
