@@ -7,6 +7,7 @@ use Larashop\Models\Product;
 use Illuminate\Http\Request;
 use Larashop\Models\Category;
 use Larashop\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductsController extends Controller
 {
@@ -83,14 +84,24 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        try
+        {
+            $product = Product::findOrFail($id);
 
-        $params = [
-            'title' => 'Delete Product',
-            'product' => $product,
-        ];
+            $params = [
+                'title' => 'Delete Product',
+                'product' => $product,
+            ];
 
-        return view('admin.products.products_delete')->with($params);
+            return view('admin.products.products_delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -101,18 +112,28 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        $brands = Brand::all();
-        $categories = Category::all();
-        $product = Product::find($id);
+        try
+        {
+            $brands = Brand::all();
+            $categories = Category::all();
+            $product = Product::findOrFail($id);
 
-        $params = [
-            'title' => 'Edit Product',
-            'brands' => $brands,
-            'categories' => $categories,
-            'product' => $product,
-        ];
+            $params = [
+                'title' => 'Edit Product',
+                'brands' => $brands,
+                'categories' => $categories,
+                'product' => $product,
+            ];
 
-        return view('admin.products.products_edit')->with($params);
+            return view('admin.products.products_edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -124,33 +145,37 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        try
+        {
+            $this->validate($request, [
+                'product_code' => 'required|unique:products,product_code,'.$id,
+                'product_name' => 'required',
+                'description' => 'required',
+                'price' => 'required',
+                'brand_id' => 'required',
+                'category_id' => 'required',
+            ]);
 
-        if (!$product){
-            return redirect()
-                ->route('products.index')
-                ->with('warning', 'The product you requested for has not been found.');
+            $product = Product::findOrFail($id);
+
+            $product->product_code = $request->input('product_code');
+            $product->product_name = $request->input('product_name');
+            $product->description = $request->input('description');
+            $product->price = $request->input('price');
+            $product->brand_id = $request->input('brand_id');
+            $product->category_id = $request->input('category_id');
+
+            $product->save();
+
+            return redirect()->route('products.index')->with('success', "The product <strong>$product->name</strong> has successfully been updated.");
         }
-
-        $this->validate($request, [
-            'product_code' => 'required|unique:products,product_code,'.$id,
-            'product_name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'brand_id' => 'required',
-            'category_id' => 'required',
-        ]);
-
-        $product->product_code = $request->input('product_code');
-        $product->product_name = $request->input('product_name');
-        $product->description = $request->input('description');
-        $product->price = $request->input('price');
-        $product->brand_id = $request->input('brand_id');
-        $product->category_id = $request->input('category_id');
-
-        $product->save();
-
-        return redirect()->route('products.index')->with('success', "The product <strong>$product->name</strong> has successfully been updated.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -161,16 +186,20 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
+        try
+        {
+            $product = Product::find($id);
 
-        if (!$product){
-            return redirect()
-                ->route('product.index')
-                ->with('warning', 'The product you requested for has not been found.');
+            $product->delete();
+
+            return redirect()->route('products.index')->with('success', "The product <strong>$product->product_name</strong> has successfully been archived.");
         }
-
-        $product->delete();
-
-        return redirect()->route('products.index')->with('success', "The product <strong>$product->product_name</strong> has successfully been archived.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }

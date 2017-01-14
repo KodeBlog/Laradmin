@@ -5,6 +5,7 @@ namespace Larashop\Http\Controllers\Admin;
 use Larashop\Models\User;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends Controller
 {
@@ -70,14 +71,24 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        try
+        {
+            $user = User::findOrFail($id);
 
-        $params = [
-            'title' => 'Delete User',
-            'user' => $user,
-        ];
+            $params = [
+                'title' => 'Delete User',
+                'user' => $user,
+            ];
 
-        return view('admin.users.users_delete')->with($params);
+            return view('admin.users.users_delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -88,14 +99,24 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        try
+        {
+            $user = User::findOrFail($id);
 
-        $params = [
-            'title' => 'Edit User',
-            'user' => $user,
-        ];
+            $params = [
+                'title' => 'Edit User',
+                'user' => $user,
+            ];
 
-        return view('admin.users.users_edit')->with($params);
+            return view('admin.users.users_edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -107,24 +128,28 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        try
+        {
+            $user = User::findOrFail($id);
 
-        if (!$user){
-            return redirect()
-                ->route('users.index')
-                ->with('warning', 'The user you requested for has not been found.');
+            $this->validate($request, [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,'.$id,
+            ]);
+
+            $user->email = $request->input('email');
+
+            $user->save();
+
+            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
         }
-
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
-        ]);
-
-        $user->email = $request->input('email');
-
-        $user->save();
-
-        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -135,16 +160,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        try
+        {
+            $user = User::findOrFail($id);
 
-        if (!$user){
-            return redirect()
-                ->route('users.index')
-                ->with('warning', 'The user you requested for has not been found.');
+            $user->delete();
+
+            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been archived.");
         }
-
-        $user->delete();
-
-        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been archived.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }

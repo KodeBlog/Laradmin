@@ -5,6 +5,7 @@ namespace Larashop\Http\Controllers\Admin;
 use Larashop\Models\Brand;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class BrandsController extends Controller
 {
@@ -68,14 +69,23 @@ class BrandsController extends Controller
      */
     public function show($id)
     {
-        $brand = Brand::find($id);
+        try{
+            $brand = Brand::findOrFail($id);
 
-        $params = [
-            'title' => 'Delete Brand',
-            'brand' => $brand,
-        ];
+            $params = [
+                'title' => 'Delete Brand',
+                'brand' => $brand,
+            ];
 
-        return view('admin.brands.brands_delete')->with($params);
+            return view('admin.brands.brands_delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -86,14 +96,24 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        $brand = Brand::find($id);
+        try
+        {
+            $brand = Brand::findOrFail($id);
 
-        $params = [
-            'title' => 'Edit Brand',
-            'brand' => $brand,
-        ];
+            $params = [
+                'title' => 'Edit Brand',
+                'brand' => $brand,
+            ];
 
-        return view('admin.brands.brands_edit')->with($params);
+            return view('admin.brands.brands_edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -105,25 +125,29 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $brand = Brand::find($id);
+        try
+        {
+            $this->validate($request, [
+                'name' => 'required|unique:brands,name,'.$id,
+                'description' => 'required',
+            ]);
 
-        if (!$brand){
-            return redirect()
-                ->route('brands.index')
-                ->with('warning', 'The brand you requested for has not been found.');
+            $brand = Brand::findOrFail($id);
+
+            $brand->name = $request->input('name');
+            $brand->description = $request->input('description');
+
+            $brand->save();
+
+            return redirect()->route('brands.index')->with('success', "The brand <strong>$brand->name</strong> has successfully been updated.");
         }
-
-        $this->validate($request, [
-            'name' => 'required|unique:brands,name,'.$id,
-            'description' => 'required',
-        ]);
-
-        $brand->name = $request->input('name');
-        $brand->description = $request->input('description');
-
-        $brand->save();
-
-        return redirect()->route('brands.index')->with('success', "The brand <strong>$brand->name</strong> has successfully been updated.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -134,16 +158,20 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        $brand = Brand::find($id);
+        try
+        {
+            $brand = Brand::findOrFail($id);
 
-        if (!$brand){
-            return redirect()
-                ->route('brands.index')
-                ->with('warning', 'The brand you requested for has not been found.');
+            $brand->delete();
+
+            return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been archived.");
         }
-
-        $brand->delete();
-
-        return redirect()->route('brands.index')->with('success', "The brand <strong>Brand</strong> has successfully been archived.");
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }
