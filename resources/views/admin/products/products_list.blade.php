@@ -21,7 +21,9 @@
                                 <th>Price</th>
                                 <th>Brand</th>
                                 <th>Category</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </thead>
                         <tfoot>
@@ -32,7 +34,9 @@
                                 <th>Price</th>
                                 <th>Brand</th>
                                 <th>Category</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </tfoot>
                         <tbody>

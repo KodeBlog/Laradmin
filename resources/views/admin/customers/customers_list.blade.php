@@ -20,7 +20,9 @@
                                 <th>Email</th>
                                 <th>Postal Address</th>
                                 <th>Physical Address</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </thead>
                         <tfoot>
@@ -30,7 +32,9 @@
                                 <th>Email</th>
                                 <th>Postal Address</th>
                                 <th>Physical Address</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </tfoot>
                         <tbody>

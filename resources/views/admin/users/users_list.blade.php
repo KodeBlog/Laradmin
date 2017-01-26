@@ -17,6 +17,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Roles</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -24,6 +25,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Roles</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -33,6 +35,11 @@
                             <tr>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->email}}</td>
+                                <td>
+                                @foreach($row->roles as $r)
+                                    <button title="{{$r->description}}" type="button" class="btn btn-success btn-xs">{{$r->display_name}}</button>
+                                @endforeach
+                                </td>
                                 <td>
                                     <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>

@@ -17,14 +17,18 @@
                             <tr>
                                 <th>Brand</th>
                                 <th>Description</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Brand</th>
                                 <th>Description</th>
+                                @ability(('','edit,delete'))
                                 <th>Action</th>
+                                @endability
                             </tr>
                         </tfoot>
                         <tbody>
@@ -33,10 +37,16 @@
                             <tr>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->description}}</td>
+                                @ability(('','edit,delete'))
                                 <td>
+                                    @permission(('edit'))
                                     <a href="{{ route('brands.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                    @endpermission
+                                    @permission(('delete'))
                                     <a href="{{ route('brands.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                    @endpermission
                                 </td>
+                                @endability
                             </tr>
                             @endforeach
                             @endif
