@@ -58,6 +58,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_id">Category <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control" id="role_id" name="role_id">
+                                    @if(count($roles))
+                                        @foreach($roles as $row)
+                                            <option value="{{$row->id}}">{{$row->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                @if ($errors->has('role_id'))
+                                <span class="help-block">{{ $errors->first('role_id') }}</span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="ln_solid"></div>
 
                         <div class="form-group">
