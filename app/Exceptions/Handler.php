@@ -56,10 +56,6 @@ class Handler extends ExceptionHandler
             return response()->view('errors.404', [], 404);
         }
 
-         return response()->view('errors.500', [
-            'sentryID' => $this->sentryID,
-        ], 500);
-
         return parent::render($request, $exception);
     }
 
@@ -76,6 +72,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest('login');
+        return redirect()->guest(route('login'));
     }
 }
