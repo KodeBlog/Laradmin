@@ -16,7 +16,7 @@ Route::get('/', [
    'as' => 'home',
    ]);
 
-Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
+Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin'],function(){
     Route::resource('customers', 'CustomersController');
     Route::resource('brands', 'BrandsController');
     Route::resource('product-categories', 'ProductCategoriesController');
@@ -28,3 +28,17 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin'],function(){
         'as' => 'orders.index',
         ]);
 });
+
+//Auth::routes();
+// Authentication Routes...
+$this->get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->post('admin/login', 'Auth\LoginController@login');
+$this->post('admin/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Password Reset Routes...
+$this->get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+$this->post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+$this->get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.token');
+$this->post('admin/password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::get('/home', 'HomeController@index');
