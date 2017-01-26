@@ -3,12 +3,21 @@
 namespace Larashop\Http\Controllers\Admin;
 
 use Larashop\Models\User;
+use Larashop\Models\Role;
 use Illuminate\Http\Request;
 use Larashop\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UsersController extends Controller
 {
+    /**
+     * Instantiate a new UserController instance.
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:users');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,8 +42,11 @@ class UsersController extends Controller
      */
     public function create()
     {
+        $roles = Role::all();
+
         $params = [
             'title' => 'Create User',
+            'roles' => $roles,
         ];
 
         return view('admin.users.users_create')->with($params);
@@ -59,6 +71,10 @@ class UsersController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
+
+        $role = Role::find($request->input('role_id'));
+
+        $user->attachRole($role);
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been created.");
     }
@@ -103,9 +119,12 @@ class UsersController extends Controller
         {
             $user = User::findOrFail($id);
 
+            $roles = Role::all();
+
             $params = [
                 'title' => 'Edit User',
                 'user' => $user,
+                'roles' => $roles,
             ];
 
             return view('admin.users.users_edit')->with($params);
@@ -137,9 +156,20 @@ class UsersController extends Controller
                 'email' => 'required|email|unique:users,email,'.$id,
             ]);
 
+            $user->name = $request->input('name');
             $user->email = $request->input('email');
 
             $user->save();
+
+            $roles = $user->roles;
+
+            foreach ($roles as $key => $value) {
+                $user->detachRole($value);
+            }
+
+            $role = Role::find($request->input('role_id'));
+
+            $user->attachRole($role);
 
             return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
         }
