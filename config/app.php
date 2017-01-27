@@ -169,6 +169,8 @@ return [
         Sentry\SentryLaravel\SentryLaravelServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Themsaid\Langman\LangmanServiceProvider::class,
         //
 
         /*
@@ -230,6 +232,7 @@ return [
         'Sentry' => Sentry\SentryLaravel\SentryFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'LaravelLocalization'   => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
 ];
