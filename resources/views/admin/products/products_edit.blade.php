@@ -7,7 +7,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Edit Product <a href="{{route('products.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> Back </a></h2>
+                    <h2>@lang('products.edit_product') <a href="{{route('products.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> @lang('general.nav.back') </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -15,7 +15,7 @@
                     <form method="post" action="{{ route('products.update', ['id' => $product->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
 
                         <div class="form-group{{ $errors->has('product_code') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="product_code">Product Code <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="product_code">@lang('products.code') <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="text" value="{{$product->product_code}}" id="product_code" name="product_code" class="form-control col-md-7 col-xs-12">
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('product_name') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="product_name">Product Name <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="product_name">@lang('products.name') <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" value="{{$product->product_name}}" id="product_name" name="product_name" class="form-control col-md-7 col-xs-12">
@@ -37,7 +37,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Product Description
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">@lang('products.description')
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" value="{{$product->description}}" id="description" name="description" class="form-control col-md-7 col-xs-12">
@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Price <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">@lang('products.price') <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" value="{{$product->price}}" id="price" name="price" class="form-control col-md-7 col-xs-12">
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('brand_id') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand_id">Brand <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="brand_id">@lang('products.brand') <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control" id="brand_id" name="brand_id">
@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_id">Category <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category_id">@lang('products.category') <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <select class="form-control" id="category_id" name="category_id">
@@ -98,7 +98,7 @@
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
                                 <input name="_method" type="hidden" value="PUT">
-                                <button type="submit" class="btn btn-success">Save Product Changes</button>
+                                <button type="submit" class="btn btn-success">@lang('general.form.save_changes')</button>
                             </div>
                         </div>
                     </form>

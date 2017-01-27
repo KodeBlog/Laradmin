@@ -38,7 +38,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>Larashop Admin!</span></a>
+                        <a href="#" class="site_title"><i class="fa fa-paw"></i> <span>@lang('general.app.name')</span></a>
                     </div>
 
                     <div class="clearfix"></div>
@@ -49,7 +49,7 @@
                             <img src="{{Auth::user()->getAvatarUrl()}}" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span>@lang('general.app.welcome'),</span>
                             <h2>{{Auth::user()->name}}</h2>
                         </div>
                     </div>
@@ -60,20 +60,20 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>@lang('general.app.general')</h3>
                             <ul class="nav side-menu">
-                                <li><a hef="#"><i class="fa fa-home"></i> Home </a></li>
-                                <li><a><i class="fa fa-edit"></i> Products <span class="fa fa-chevron-down"></span></a>
+                                <li><a hef="#"><i class="fa fa-home"></i> @lang('general.nav.home') </a></li>
+                                <li><a><i class="fa fa-edit"></i> @lang('general.nav.products') <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{route('brands.index')}}">Brands list</a></li>
-                                        <li><a href="{{route('product-categories.index')}}">Categories</a></li>
-                                        <li><a href="{{route('products.index')}}">Products list</a></li>
+                                        <li><a href="{{route('brands.index')}}">@lang('general.nav.brands_list')</a></li>
+                                        <li><a href="{{route('product-categories.index')}}">@lang('general.nav.categories_list')</a></li>
+                                        <li><a href="{{route('products.index')}}">@lang('general.nav.products_list')</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{route('customers.index')}}"><i class="fa fa-user"></i> Customers </a></li>
-                                <li><a href="{{route('orders.index')}}"><i class="fa fa-shopping-cart"></i> Orders </a></li>
+                                <li><a href="{{route('customers.index')}}"><i class="fa fa-user"></i> @lang('general.nav.customers') </a></li>
+                                <li><a href="{{route('orders.index')}}"><i class="fa fa-shopping-cart"></i> @lang('general.nav.orders') </a></li>
                                 @permission(('users'))
-                                <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> Users </a></li>
+                                <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> @lang('general.nav.users') </a></li>
                                 @endpermission
                             </ul>
                         </div>
@@ -118,7 +118,7 @@
                                         <a href="{{route('logout')}}"
                                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out pull-right"></i> Log Out
+                                        <i class="fa fa-sign-out pull-right"></i> @lang('general.logout.logout')
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -8,34 +8,34 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Products <a href="{{route('products.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h2>
+                    <h2>@lang('products.products') <a href="{{route('products.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> @lang('general.app.create_new') </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Brand</th>
-                                <th>Category</th>
+                                <th>@lang('products.code')</th>
+                                <th>@lang('products.name')</th>
+                                <th>@lang('products.description')</th>
+                                <th>@lang('products.price')</th>
+                                <th>@lang('products.brand')</th>
+                                <th>@lang('products.category')</th>
                                 @ability(('','edit,delete'))
-                                <th>Action</th>
+                                <th>@lang('products.action')</th>
                                 @endability
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Brand</th>
-                                <th>Category</th>
+                                <th>@lang('products.code')</th>
+                                <th>@lang('products.name')</th>
+                                <th>@lang('products.description')</th>
+                                <th>@lang('products.price')</th>
+                                <th>@lang('products.brand')</th>
+                                <th>@lang('products.category')</th>
                                 @ability(('','edit,delete'))
-                                <th>Action</th>
+                                <th>@lang('products.action')</th>
                                 @endability
                             </tr>
                         </tfoot>

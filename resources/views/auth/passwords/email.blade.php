@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Larashop Admin Login</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
     <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -37,7 +38,7 @@
                     @endif
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
-                        <h1>Password Reset</h1>
+                        <h1>@lang('general.passwords.title')</h1>
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -48,8 +49,8 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-default submit">Send Password Reset Link</button>
-                            <a class="reset_pass" href="{{route('login')}}">Login</a>
+                            <button type="submit" class="btn btn-default submit">@lang('general.passwords.send_password_link')</button>
+                            <a class="reset_pass" href="{{route('login')}}">@lang('general.login.login')</a>
                         </div>
 
                         <div class="clearfix"></div>

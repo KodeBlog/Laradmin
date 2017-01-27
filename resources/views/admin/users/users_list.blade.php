@@ -8,25 +8,25 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Users <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h2>
+                    <h2>@lang('users.users') <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> @lang('general.app.create_new') </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Action</th>
+                                <th>@lang('users.name')</th>
+                                <th>@lang('users.email')</th>
+                                <th>@lang('users.roles')</th>
+                                <th>@lang('users.action')</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th>Action</th>
+                                <th>@lang('users.name')</th>
+                                <th>@lang('users.email')</th>
+                                <th>@lang('users.roles')</th>
+                                <th>@lang('users.action')</th>
                             </tr>
                         </tfoot>
                         <tbody>

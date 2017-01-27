@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Larashop Admin | Password Reset</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
     <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -35,8 +36,8 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form role="form" method="POST" action="{{ route('password.reset') }}">
-                        <h3>Reset Password</h3>
+                    <form role="form" method="post" action="{{ route('password.reset') }}">
+                        <h3>@lang('general.passwords.title')</h3>
 
                         {{ csrf_field() }}
 
@@ -46,7 +47,7 @@
                             @if ($errors->has('email'))
                             <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                             @endif
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="@lang('general.passwords.email')"/>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">

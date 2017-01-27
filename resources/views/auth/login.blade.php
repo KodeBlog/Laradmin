@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Larashop Admin Login</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset('admin/images/favicon.png')}}"/>
 
     <!-- Bootstrap -->
     <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -27,24 +28,24 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <form role="form" method="POST" action="{{ route('login') }}">
-                        <h1>Larashop | Login</h1>
+                    <form role="form" method="post" action="{{ route('login') }}">
+                        <h1>@lang('general.login.title')</h1>
                         {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             @if ($errors->has('email'))
                             <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
                             @endif
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="@lang('general.login.email')"/>
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             @if ($errors->has('password'))
                             <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>
                             @endif
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="@lang('general.login.password')"/>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-default submit">Login</button>
-                            <a class="reset_pass" href="{{route('password.reset')}}">Lost your password?</a>
+                            <button type="submit" class="btn btn-default submit">@lang('general.login.login')</button>
+                            <a class="reset_pass" href="{{route('password.reset')}}">@lang('general.login.lost_your_password')</a>
                         </div>
 
                         <div class="clearfix"></div>

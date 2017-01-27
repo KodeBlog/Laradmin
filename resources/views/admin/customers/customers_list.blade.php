@@ -8,32 +8,32 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Customers <a href="{{route('customers.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h2>
+                    <h2>@lang('customers.customers') <a href="{{route('customers.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> @lang('general.app.create_new') </a></h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Postal Address</th>
-                                <th>Physical Address</th>
+                                <th>@lang('customers.first_name')</th>
+                                <th>@lang('customers.last_name')</th>
+                                <th>@lang('customers.email')</th>
+                                <th>@lang('customers.postal_address')</th>
+                                <th>@lang('customers.physical_address')</th>
                                 @ability(('','edit,delete'))
-                                <th>Action</th>
+                                <th>@lang('customers.action')</th>
                                 @endability
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Postal Address</th>
-                                <th>Physical Address</th>
+                                <th>@lang('customers.first_name')</th>
+                                <th>@lang('customers.last_name')</th>
+                                <th>@lang('customers.email')</th>
+                                <th>@lang('customers.postal_address')</th>
+                                <th>@lang('customers.physical_address')</th>
                                 @ability(('','edit,delete'))
-                                <th>Action</th>
+                                <th>@lang('customers.action')</th>
                                 @endability
                             </tr>
                         </tfoot>
