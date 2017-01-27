@@ -63,7 +63,8 @@ class UsersController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|unique:users',
-            'password' => 'required',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
         ]);
 
         $user = User::create([
@@ -76,7 +77,7 @@ class UsersController extends Controller
 
         $user->attachRole($role);
 
-        return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been created.");
+        return redirect()->route('users.index')->with('success', trans('general.form.flash.created',['name' => $user->name]));
     }
 
     /**
@@ -171,7 +172,7 @@ class UsersController extends Controller
 
             $user->attachRole($role);
 
-            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been updated.");
+            return redirect()->route('users.index')->with('success', trans('general.form.flash.updated',['name' => $user->name]));
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -196,7 +197,7 @@ class UsersController extends Controller
 
             $user->delete();
 
-            return redirect()->route('users.index')->with('success', "The user <strong>$user->name</strong> has successfully been archived.");
+            return redirect()->route('users.index')->with('success', trans('general.form.flash.deleted',['name' => $user->name]));
         }
         catch (ModelNotFoundException $ex) 
         {

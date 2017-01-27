@@ -34,7 +34,7 @@ class ProductsController extends Controller
             'title' => 'Products Listing',
             'products' => $products,
         ];
-
+        
         return view('admin.products.products_list')->with($params);
     }
 
@@ -83,7 +83,7 @@ class ProductsController extends Controller
             'category_id' => $request->input('category_id'),
         ]);
 
-        return redirect()->route('products.index')->with('success', "The product <strong>Product name</strong> has successfully been created.");
+        return redirect()->route('products.index')->with('success', trans('general.form.flash.created',['name' => $product->product_name]));
     }
 
     /**
@@ -177,7 +177,7 @@ class ProductsController extends Controller
 
             $product->save();
 
-            return redirect()->route('products.index')->with('success', "The product <strong>$product->name</strong> has successfully been updated.");
+            return redirect()->route('products.index')->with('success', trans('general.form.flash.updated',['name' => $product->product_name]));
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -202,7 +202,7 @@ class ProductsController extends Controller
 
             $product->delete();
 
-            return redirect()->route('products.index')->with('success', "The product <strong>$product->product_name</strong> has successfully been archived.");
+            return redirect()->route('products.index')->with('success', trans('general.form.flash.deleted',['name' => $product->product_name]));
         }
         catch (ModelNotFoundException $ex) 
         {

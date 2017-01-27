@@ -74,7 +74,7 @@ class CustomersController extends Controller
             'physical_address' => $request->input('physical_address'),
         ]);
 
-        return redirect()->route('customers.index')->with('success', "The customer <strong>$customer->first_name</strong> has successfully been created.");
+        return redirect()->route('customers.index')->with('success', trans('general.form.flash.created',['name' => $customer->first_name]));
     }
 
     /**
@@ -162,7 +162,7 @@ class CustomersController extends Controller
 
             $customer->save();
 
-            return redirect()->route('customers.index')->with('success', "The customer <strong>$customer->first_name</strong> has successfully been updated.");
+            return redirect()->route('customers.index')->with('success', trans('general.form.flash.updated',['name' => $customer->first_name]));
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -187,7 +187,7 @@ class CustomersController extends Controller
 
             $customer->delete();
 
-            return redirect()->route('customers.index')->with('success', "The customer <strong>$customer->first_name</strong> has successfully been archived.");
+            return redirect()->route('customers.index')->with('success', trans('general.form.flash.deleted',['name' => $customer->first_name]));
         }
         catch (ModelNotFoundException $ex) 
         {

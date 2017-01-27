@@ -68,7 +68,7 @@ class ProductCategoriesController extends Controller
             'description' => $request->input('description'),
         ]);
 
-        return redirect()->route('product-categories.index')->with('success', "The product category <strong>$category->name</strong> has successfully been created.");
+        return redirect()->route('product-categories.index')->with('success', trans('general.form.flash.created',['name' => $category->name]));
     }
 
     /**
@@ -150,7 +150,7 @@ class ProductCategoriesController extends Controller
 
             $category->save();
 
-            return redirect()->route('product-categories.index')->with('success', "The product category <strong>Category</strong> has successfully been updated.");
+            return redirect()->route('product-categories.index')->with('success', trans('general.form.flash.updated',['name' => $category->name]));
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -175,7 +175,7 @@ class ProductCategoriesController extends Controller
 
             $category->delete();
 
-            return redirect()->route('product-categories.index')->with('success', "The product category <strong>Category</strong> has successfully been archived.");
+            return redirect()->route('product-categories.index')->with('success', trans('general.form.flash.deleted',['name' => $brand->name]));
         }
         catch (ModelNotFoundException $ex) 
         {
