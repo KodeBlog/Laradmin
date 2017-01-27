@@ -9,7 +9,9 @@
         "laravel/framework": "5.3.*",
         "sentry/sentry-laravel": "^0.5.0",
         "barryvdh/laravel-debugbar": "^2.3",
-        "zizaco/entrust": "^1.7"
+        "zizaco/entrust": "^1.7",
+        "mcamara/laravel-localization": "^1.1",
+        "themsaid/laravel-langman": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
