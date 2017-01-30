@@ -12,9 +12,9 @@
 */
 
 Route::get('/', [
-   'uses' => 'HomeController@index',
-   'as' => 'home',
-   ]);
+    'uses' => 'HomeController@index',
+    'as' => 'home',
+]);
 
 Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin'],function(){
     Route::resource('customers', 'CustomersController');
@@ -26,19 +26,21 @@ Route::group(['prefix' => 'admin','middleware' => 'auth','namespace' => 'Admin']
     Route::get('orders',[
         'uses' => 'OrdersController@index',
         'as' => 'orders.index',
-        ]);
+    ]);
 });
 
 //Auth::routes();
-// Authentication Routes...
-$this->get('admin/login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('admin/login', 'Auth\LoginController@login');
-$this->post('admin/logout', 'Auth\LoginController@logout')->name('logout');
+Route::group(['prefix' => 'admin','namespace' => 'Auth'],function(){
+    // Authentication Routes...
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@login');
+    Route::post('logout', 'LoginController@logout')->name('logout');
 
-// Password Reset Routes...
-$this->get('admin/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
-$this->post('admin/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-$this->get('admin/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.token');
-$this->post('admin/password/reset', 'Auth\ResetPasswordController@reset');
+    // Password Reset Routes...
+    Route::get('password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+    Route::post('password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset.token');
+    Route::post('password/reset', 'ResetPasswordController@reset');
+});
 
 Route::get('/home', 'HomeController@index');
