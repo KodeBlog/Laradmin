@@ -12,7 +12,7 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        $permission = [
+        $permissions = [
             [
                 'name' => 'create',
                 'display_name' => 'Create Record',
@@ -35,7 +35,7 @@ class PermissionsTableSeeder extends Seeder
             ]
         ];
 
-        foreach ($permission as $key => $value) {
+        foreach ($permissions as $key => $value) {
             Permission::create($value);
         }
     }
