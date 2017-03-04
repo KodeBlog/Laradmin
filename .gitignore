@@ -2,5 +2,6 @@
 /public/storage
 /vendor
 /.idea
+/storage/debugbar/
 Homestead.json
 Homestead.yaml
